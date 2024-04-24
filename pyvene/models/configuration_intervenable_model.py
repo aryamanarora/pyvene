@@ -80,6 +80,7 @@ class IntervenableConfig(PretrainedConfig):
         self.intervention_dimensions = intervention_dimensions
         self.intervention_constant_sources = intervention_constant_sources
         self.model_type = model_type
+        self.dataset_args = {}
         super().__init__(**kwargs)
     
     def add_intervention(self, representations):
@@ -128,6 +129,7 @@ class IntervenableConfig(PretrainedConfig):
             "mode": self.mode,
             "sorted_keys": tuple(self.sorted_keys) if self.sorted_keys is not None else str(self.sorted_keys),
             "intervention_dimensions": str(self.intervention_dimensions),
+            "dataset_args": self.dataset_args,
         }
         _repr_string = json.dumps(_repr, indent=4)
 

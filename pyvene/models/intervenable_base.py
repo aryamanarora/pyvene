@@ -416,7 +416,8 @@ class IntervenableModel(nn.Module):
                 v[0].zero_grad()
     
     def save(
-        self, save_directory, save_to_hf_hub=False, hf_repo_name="my-awesome-model"
+        self, save_directory, save_to_hf_hub=False, hf_repo_name="my-awesome-model",
+        num_interventions=None, position=None, share_weights=None
     ):
         """
         Save interventions to disk or hub
@@ -433,6 +434,11 @@ class IntervenableModel(nn.Module):
         saving_config.model_type = str(
             saving_config.model_type
         )
+        saving_config.dataset_args = {
+            "num_interventions": num_interventions,
+            "position": position,
+            "share_weights": share_weights,
+        }
         saving_config.intervention_types = []
         saving_config.intervention_dimensions = []
         saving_config.intervention_constant_sources = []
